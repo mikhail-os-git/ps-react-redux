@@ -1,0 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:regular,600,700);
+:root {
+	font-family: "Poppins", sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color: rgba(255, 255, 255, 0.87);
+	/* backdrop-filter: blur(40px); */
+	background: #121829;
+
+}
