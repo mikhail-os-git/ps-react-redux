@@ -1,13 +1,11 @@
 import './Input.css';
+export function Input({inputType, text}) {
 
-export function Input({inputArt, text}) {
-
-	const isSearch = inputArt == 'search';
-
+	const isSearch = inputType === 'search';
 	const name = isSearch ? 'search-input' :'login-input';
-	const iconPath = '../../../public/search/search-icon.svg';
 
+	const searchIcon = '/public/search/search-icon.svg';
 	return (
-		<input type="text" name={name} className={'site-input ' + name} placeholder={text} style={isSearch ? { background: `url(${iconPath}) no-repeat center left 16px`}: {}}/>
+		<input type="text" name={name} className={'site-input ' + name} placeholder={text} style={isSearch ? { background: `url(${searchIcon}) no-repeat center left 16px`}: {}}/>
 	);
 }

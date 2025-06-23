@@ -7,7 +7,7 @@ import { CardList } from './components/CardList/CardList';
 function App() {
 
 	const filterItems = itemName => {
-		setSearchItems(oldItems => [...oldItems].filter(i => i.name === itemName));
+		setSearchItems(oldItems => [...oldItems].filter(i =>i.name === itemName));
 	};
 
 	

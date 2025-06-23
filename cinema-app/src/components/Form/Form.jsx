@@ -1,6 +1,6 @@
 import './Form.css';
 
-export function Form({formArt,filterItemsFunc,children}) {
+export function Form({formType,filterItemsFunc,children}) {
 
 	const formSubmit = (e) =>{
 		e.preventDefault();
@@ -12,9 +12,7 @@ export function Form({formArt,filterItemsFunc,children}) {
 			filterItemsFunc(formProps['search-input']);
 		}
 	};
-
-
-	const cl = formArt === 'search' ? 'search-form' : 'login-form';
+	const cl = formType === 'search' ? 'search-form' : 'login-form';
 
 	return (
 		<form className={cl} onSubmit={formSubmit}>

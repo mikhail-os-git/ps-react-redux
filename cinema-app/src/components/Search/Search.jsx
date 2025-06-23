@@ -13,8 +13,8 @@ export function Search({filterItemsFunc}){
 
 			<Title text="Поиск"/>
 			<Paragraph fontSize = "16px" text = "Введите название фильма, сериала или мультфильма для поиска и добавления в избранное."/>
-			<Form formArt={formSearch} filterItemsFunc={filterItemsFunc}>
-				<Input inputArt={formSearch} text="Введите название"/>
+			<Form formType={formSearch} filterItemsFunc={filterItemsFunc}>
+				<Input inputType={formSearch} text="Введите название"/>
 				<Button text="Найти" onClick={()=> console.log('найти')}></Button>
 			</Form>
 		</section>

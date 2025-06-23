@@ -1,18 +1,10 @@
 import './CardItem.css';
+import bookmarkIcon from '/public/cardlist/card-icons/bookmark.svg';
+import likeIcon from '/public/cardlist/card-icons/like.svg';
+import starIcon from '/public/cardlist/card-icons/star.svg';
 
 export function CardItem({item}){
 
-	// let favorite = <div className='card-item__favorite favorite'>
-	// 	<img className = "favorite__icon" src="../../../public/cardlist/card-icons/like.svg" alt="иконка добавить в избранное" />
-	// 	<p className='favorite__text'>В избранное</p>
-	// </div>;
-
-	// if(item.favorite){
-	// 	<div className='card-item__favorite favorite'>
-	// 		<img className = "favorite__icon" src="../../../public/cardlist/card-icons/bookmark.svg" alt="иконка в избранном" />
-	// 		<p className='favorite__text isFavorite'>В избранном</p>
-	// 	</div>;
-	// }
 	const isFavorite = item.favorite;
 	const favorite = (
 		<div className="card-item__favorite favorite">
@@ -20,8 +12,8 @@ export function CardItem({item}){
 				className="favorite__icon"
 				src={
 					isFavorite
-						? '../../../public/cardlist/card-icons/bookmark.svg'
-						: '../../../public/cardlist/card-icons/like.svg'
+						? bookmarkIcon
+						: likeIcon
 				}
 				alt={
 					isFavorite
@@ -40,7 +32,7 @@ export function CardItem({item}){
 			<img src={item.image} alt={'картинка фильма' + item.name} />
 
 			<div className='card-item__rating'>
-				<img src="../../../public/cardlist/card-icons/star.svg" alt="иконка рейтинга" />
+				<img src={starIcon} alt="иконка рейтинга" />
 				<p>{item.rating}</p>
 			</div>
 
