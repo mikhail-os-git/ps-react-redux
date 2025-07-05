@@ -1,4 +1,4 @@
-import './Search.css';
+import styles from'./Search.module.css';
 import {Title} from '../Title/Title';
 import { Paragraph } from '../Paragraph/Paragraph';
 import {Button} from '../Button/Button';
@@ -9,7 +9,7 @@ export function Search({filterItemsFunc}){
 	const formSearch = 'search';
 	return(
 
-		<section className="search">
+		<section className={styles['search']}>
 
 			<Title text="Поиск"/>
 			<Paragraph fontSize = "16px" text = "Введите название фильма, сериала или мультфильма для поиска и добавления в избранное."/>

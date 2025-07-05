@@ -1,7 +1,7 @@
-import './CardButton.css';
+import styles from './CardButton.module.css';
 
 export function CardButton({children}){
 	return(
-		<button className='card-button'>{children}</button>
+		<button className={styles['card-button']}>{children}</button>
 	);
 }

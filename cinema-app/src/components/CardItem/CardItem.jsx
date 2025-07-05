@@ -1,15 +1,16 @@
-import './CardItem.css';
+import styles from './CardItem.module.css';
 import bookmarkIcon from '/public/cardlist/card-icons/bookmark.svg';
 import likeIcon from '/public/cardlist/card-icons/like.svg';
 import starIcon from '/public/cardlist/card-icons/star.svg';
+import cn from 'classnames';
 
 export function CardItem({item}){
 
 	const isFavorite = item.favorite;
 	const favorite = (
-		<div className="card-item__favorite favorite">
+		<div className={cn(styles['card-item__favorite'],styles['favorite'])}>
 			<img
-				className="favorite__icon"
+				className={styles['favorite__icon']}
 				src={
 					isFavorite
 						? bookmarkIcon
@@ -21,23 +22,26 @@ export function CardItem({item}){
 						: 'иконка добавить в избранное'
 				}
 			/>
-			<a className={`favorite__text ${isFavorite ? 'isFavorite' : ''}`}>
+			<a className={
+				cn(styles['favorite__text'], {
+					[[styles['isFavorite']]]: isFavorite
+				})}>
 				{isFavorite ? 'В избранном' : 'В избранное'}
 			</a>
 		</div>
 	);
 
 	return (
-		<li className='card-list__item card-item'>
+		<li className={cn(styles['card-list__item'], styles['card-item'])}>
 			<img src={item.image} alt={'картинка фильма' + item.name} />
 
-			<div className='card-item__rating'>
+			<div className={styles['card-item__rating']}>
 				<img src={starIcon} alt="иконка рейтинга" />
 				<p>{item.rating}</p>
 			</div>
 
-			<div className='card-item__info'>
-				<h3 className='card-item__name'>{item.name}</h3>
+			<div className={styles['card-item__info']}>
+				<h3 className={styles['card-item__name']}>{item.name}</h3>
 
 				{favorite}
 			</div>

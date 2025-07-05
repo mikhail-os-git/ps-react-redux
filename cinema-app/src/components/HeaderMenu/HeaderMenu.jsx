@@ -1,23 +1,24 @@
-import './HeaderMenu.css';
+import styles from './HeaderMenu.module.css';
+import cn from 'classnames';
 
 export function HeaderMenu(){
 	return(
-		<nav className='header-menu'>
-			<ul className='header-menu__list'>
-				<li className='header-menu__item menu-item'>
-					<a href="#" className="menu-item__link">Поиск фильмов</a>
+		<nav className={styles['header-menu']}>
+			<ul className={styles['header-menu__list']}>
+				<li className={ cn(styles['header-menu__item'],styles['menu-item'])}>
+					<a href="#" className={styles['menu-item__link']}>Поиск фильмов</a>
 				</li>
-				<li className='header-menu__item menu-item'>
-					<a href="#" className="menu-item__link">Мои фильмы
+				<li className={cn(styles['header-menu__item'],styles['menu-item'])}>
+					<a href="#" className={styles['menu-item__link']}>Мои фильмы
 
-						<div className='menu-item__count'>2</div>
+						<div className={styles['menu-item__count']}>2</div>
 
 					</a>
 				</li>
-				<li className='header-menu__item menu-item'>
-					<a href="#" className="menu-item__link">
+				<li className={cn(styles['header-menu__item'],styles['menu-item'])}>
+					<a href="#" className={styles['menu-item__link']}>
 						Войти
-						<img className='menu-item__img' src="../../../public/header/menu-icon-logout.svg" alt="Иконка выхода" />
+						<img className={styles['menu-item__img']} src="../../../public/header/menu-icon-logout.svg" alt="Иконка выхода" />
 					</a>
 				</li>
 			</ul>

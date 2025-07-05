@@ -1,4 +1,4 @@
-import './Form.css';
+import styles from './Form.module.css';
 
 export function Form({formType,filterItemsFunc,children}) {
 
@@ -15,7 +15,7 @@ export function Form({formType,filterItemsFunc,children}) {
 	const cl = formType === 'search' ? 'search-form' : 'login-form';
 
 	return (
-		<form className={cl} onSubmit={formSubmit}>
+		<form className={styles[cl]} onSubmit={formSubmit}>
 			{children}
 		</form>
 	);
