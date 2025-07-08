@@ -1,22 +1,66 @@
 import styles from './Form.module.css';
+import {Button} from '../Button/Button';
+import { Input } from '../Input/Input';
+import cn from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 
-export function Form({formType,filterItemsFunc,children}) {
+
+export function Form({formType, actionFunc, inputText, buttonText}) {	
+	const inputRef = useRef();
+
+	const inputInvalid = (isValid) => {
+		if(!isValid) {
+			inputRef.current.focus();
+		}
+	};
+	const [formState, setValidity] = useState({target: true});
+
+
+
+	useEffect(() => {
+		let timerId;
+		if(!formState.target) {
+			inputInvalid(formState.target);
+			timerId = setTimeout(() => {
+				setValidity(true);
+			}, 2000);
+		}
+		return () => {
+			if(timerId) {
+				clearTimeout(timerId);
+			}
+		};
+	},[formState]);
+
+	const cl = formType === 'search' ? 'form_search' : 'form_login';
+
 
 	const formSubmit = (e) =>{
 		e.preventDefault();
-
+		
 		const formData = new FormData(e.target);
 		const formProps = Object.fromEntries(formData);
 
-		if('search-input' in formProps){
-			filterItemsFunc(formProps['search-input']);
+		let isValid = Object.values(formProps).every(value => value.length !== 0);
+		setValidity(fs => ({...fs,target:isValid}));
+		if(!isValid) {
+			return;
 		}
+		if('search-input' in formProps){
+			actionFunc('SEARCH_ITEM',formProps['search-input']);
+		}
+
+		if('login-input' in formProps){
+			actionFunc('SEARCH_USER',formProps['login-input']);
+		}
+
+		inputRef.current.value = '';
 	};
-	const cl = formType === 'search' ? 'search-form' : 'login-form';
 
 	return (
-		<form className={styles[cl]} onSubmit={formSubmit}>
-			{children}
+		<form className={cn(styles['form'], styles[cl])} onSubmit={formSubmit}>
+			<Input ref={inputRef} type="text" isValid={formState.target} inputType={formType} text={inputText}/>
+			<Button text={buttonText}/>
 		</form>
 	);
 }
