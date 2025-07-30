@@ -13,7 +13,7 @@ export function HeaderMenu(){
 	Войти
 		<img className={styles['menu-item__img']} src="../../../public/header/menu-icon-logout.svg" alt="Иконка Входа" />
 	</a>;
-	if(user){
+	if(Object.keys(user).length){
 		button = <a onClick={logout} href="#" className={styles['menu-item__link']}>
 		Выйти
 		</a>;
