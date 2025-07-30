@@ -3,8 +3,8 @@ import './App.css';
 import { Header } from './components/Header/Header';
 import { Search } from './components/Search/Search';
 import { CardList } from './components/CardList/CardList';
-import {useLocalStorage} from './hooks/useLocalStorage.hook';
 import { Login } from './components/Login/Login';
+import { UserContextProvider } from './context/user.context';
 
 
 const INIT_DATA = [
@@ -66,56 +66,28 @@ const INIT_DATA = [
 	}
 ];
 
+
+
+
 function App() {
-	const [users, saveUsers] = useLocalStorage('data');
 	const [cardItems, setSearchItems] = useState(INIT_DATA);
 
 
 	const filterItems = (itemName) => {
-		setSearchItems(oldItems => [...oldItems].filter(i =>i.name === itemName));
+		setSearchItems(oldItems => [...oldItems].filter(i =>i.name.toLowerCase() === itemName.toLowerCase()));
 	};
 
-	const filterUsers = (userName) => {
-		const updated = users.map(user =>
-			user.username.toLowerCase() === userName.toLowerCase() ? { ...user, isLogined: true } : user
-		);
-		saveUsers(updated);
-	};
-
-	const userLogout = () => {
-		const logout = users.map(user => ({
-			...user,
-			isLogined: false
-		}));
-		saveUsers(logout);
-	};
-
-	const actionsChoice = (typeAct, value) =>{
-		switch (typeAct) {
-		case 'SEARCH_ITEM': {
-			filterItems(value);
-			break;
-		}
-		case 'SEARCH_USER':{
-			filterUsers(value);
-			break;
-		}
-		default:
-			console.warn(`Unknown action: ${typeAct}`);
-			break;
-		}
-	};
 
 	return (
-		
-		<>
-			<Header dataUsers={users} onClick={userLogout}/>
+		<UserContextProvider>
+			<Header/>
 			<main className="main">
-				<Search actionFunc={actionsChoice}/>
+				<Search actionFunc={filterItems}/>
 				<CardList items={cardItems}/>
-				<Login actionFunc={actionsChoice}/>
+				<Login/>
+
 			</main>
-		</>
+		</UserContextProvider>
 	);
 }
 

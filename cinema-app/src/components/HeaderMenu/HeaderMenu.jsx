@@ -2,23 +2,24 @@ import styles from './HeaderMenu.module.css';
 import cn from 'classnames';
 
 import userIcon from '../../../public/header/user-icon.svg';
+import { useContext } from 'react';
+import { UserContext } from '../../context/user.context';
 
-export function HeaderMenu({dataUsers, onClick}){
+export function HeaderMenu(){
 
-	const user = dataUsers.filter(user => user.isLogined === true);
-
+	const {user, logout} = useContext(UserContext);
 	let userItem;
 	let button = <a href="#" className={styles['menu-item__link']}>
 	Войти
 		<img className={styles['menu-item__img']} src="../../../public/header/menu-icon-logout.svg" alt="Иконка Входа" />
 	</a>;
-	if(user.length > 0){
-		button = <a onClick={onClick} href="#" className={styles['menu-item__link']}>
+	if(user){
+		button = <a onClick={logout} href="#" className={styles['menu-item__link']}>
 		Выйти
 		</a>;
 
 		userItem = <li className={cn(styles['header-menu__item'],styles['menu-item'])}>
-			<a href="#" className={styles['menu-item__link']}>{user[0].username}
+			<a href="#" className={styles['menu-item__link']}>{user?.username}
 				<img src={userIcon} alt="иконка пользователя" />
 			</a>
 		</li>;
