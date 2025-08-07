@@ -1,10 +1,10 @@
 import { CardButton } from '../CardButton/CardButton';
 import { CardItem } from '../CardItem/CardItem';
-import './CardList.css';
+import styles from './CardList.module.css';
 
 export function CardList({items}) {
 	
-	let list = <p className='card-list__info'>Ничего не найдено</p>;
+	let list = <p className={styles['card-list__info']}>Ничего не найдено</p>;
 
 	if(items.length > 0){
 		list = items.map(item => {
@@ -15,8 +15,8 @@ export function CardList({items}) {
 	}
 
 	return(
-		<section className="cards">
-			<ul className='card-list'>
+		<section className={styles['cards']}>
+			<ul className={styles['card-list']}>
 				{list}
 			</ul>
 		</section>

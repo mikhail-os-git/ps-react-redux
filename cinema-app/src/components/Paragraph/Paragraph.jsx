@@ -1,7 +1,7 @@
-import './Paragraph.css';
+import styles from'./Paragraph.module.css';
 
 export function Paragraph({ text, fontSize }){
 	return(
-		<p className="site-paragraph" style={{fontSize: fontSize}}>{text}</p>
+		<p className={styles['site-paragraph']} style={{fontSize: fontSize}}>{text}</p>
 	);
 }
