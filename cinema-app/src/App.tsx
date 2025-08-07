@@ -5,6 +5,7 @@ import { Search } from './components/Search/Search';
 import { CardList } from './components/CardList/CardList';
 import { Login } from './components/Login/Login';
 import { UserContextProvider } from './context/user.context';
+import type { IItem } from './types/item';
 
 
 const INIT_DATA = [
@@ -70,10 +71,10 @@ const INIT_DATA = [
 
 
 function App() {
-	const [cardItems, setSearchItems] = useState(INIT_DATA);
+	const [cardItems, setSearchItems] = useState<IItem[]>(INIT_DATA);
 
 
-	const filterItems = (itemName) => {
+	const filterItems = (itemName: string) => {
 		setSearchItems(oldItems => [...oldItems].filter(i =>i.name.toLowerCase() === itemName.toLowerCase()));
 	};
 

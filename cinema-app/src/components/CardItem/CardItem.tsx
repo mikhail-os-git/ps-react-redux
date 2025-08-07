@@ -3,8 +3,9 @@ import bookmarkIcon from '/public/cardlist/card-icons/bookmark.svg';
 import likeIcon from '/public/cardlist/card-icons/like.svg';
 import starIcon from '/public/cardlist/card-icons/star.svg';
 import cn from 'classnames';
+import type { CardItemProps } from './CardItem.props';
 
-export function CardItem({item}){
+export function CardItem({item}: CardItemProps){
 
 	const isFavorite = item.favorite;
 	const favorite = (
@@ -24,7 +25,7 @@ export function CardItem({item}){
 			/>
 			<a className={
 				cn(styles['favorite__text'], {
-					[[styles['isFavorite']]]: isFavorite
+					[styles['isFavorite']]: isFavorite
 				})}>
 				{isFavorite ? 'В избранном' : 'В избранное'}
 			</a>

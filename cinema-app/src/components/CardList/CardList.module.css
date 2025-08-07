@@ -5,11 +5,15 @@
 
 padding: 0;
 }
-
+/* 
 .card-list__info {
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 150%;
 	letter-spacing: 0.02em;
 	color: #ebeef5;
+} */
+
+.card-list__info {
+	text-align: center;
 }

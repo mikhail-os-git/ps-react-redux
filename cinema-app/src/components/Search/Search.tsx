@@ -1,7 +1,7 @@
 import styles from'./Search.module.css';
 import styleForm from '../Form/Form.module.css';
 import cn from 'classnames';
-import { useRef } from 'react';
+import { useRef, type RefObject } from 'react';
 import { useFormSubmit } from '../../hooks/useFormSubmit.hook';
 import { validateForm } from '../Form/validationForm';
 import {Title} from '../Title/Title';
@@ -11,14 +11,14 @@ import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
 
 
-export function Search({actionFunc}){
-	const inputRef = useRef();
+export function Search({actionFunc} : {actionFunc: (args: string) => void}){
+	const inputRef = useRef<HTMLInputElement>(null);
 	const formSearch = 'search';
 
-	const { formValidity, handleSubmit } = useFormSubmit({
+	const { stateValidity, handleSubmit } = useFormSubmit({
 		onValidate: validateForm,
 		onSuccess: (data) => actionFunc(data),
-		inputRef
+		inputRef:inputRef as RefObject<HTMLInputElement>
 	});
 
 	return(
@@ -30,8 +30,8 @@ export function Search({actionFunc}){
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_search'])}>
 
-				<Input ref={inputRef} type="text" isValid={formValidity} inputType={formSearch} text="Введите название"/>
-				<Button text="Искать"/>
+				<Input ref={inputRef} type="text" isValid={stateValidity} inputType={formSearch} text="Введите название"/>
+				<Button>Искать</Button>
 			
 			</Form>
 		</section>

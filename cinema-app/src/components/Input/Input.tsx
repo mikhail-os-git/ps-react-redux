@@ -1,7 +1,10 @@
 import { forwardRef } from 'react';
 import styles from './Input.module.css';
 import cn from 'classnames';
-export const Input = forwardRef(function Input({inputType, text, isValid = true, ...props}, ref) {
+import type { InputProps } from './Input.props';
+
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({inputType = '', text = '', isValid = true, ...props}, ref) {
 
 	const isSearch = inputType === 'search';
 

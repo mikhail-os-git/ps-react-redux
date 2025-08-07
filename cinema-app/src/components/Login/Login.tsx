@@ -1,25 +1,27 @@
 import styles from'./Login.module.css';
 import styleForm from '../Form/Form.module.css';
 import cn from 'classnames';
-import { useContext, useRef } from 'react';
+import { type RefObject, useContext, useRef } from 'react';
 import { useFormSubmit } from '../../hooks/useFormSubmit.hook';
 import { validateForm } from '../Form/validationForm';
-import {Title} from '../Title/Title';
+import { Title } from '../Title/Title';
 import { Form } from '../Form/Form';
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
 import { UserContext } from '../../context/user.context';
 
-export function Login(){
-	const inputRef = useRef();
+export const Login: React.FC = () =>{
+	const inputRef = useRef<HTMLInputElement>(null);
 	const formLogin = 'login';
 
-	const {filter} = useContext(UserContext);
+	const context = useContext(UserContext);
 
-	const { formValidity, handleSubmit } = useFormSubmit({
+	const filter = context!.filter;
+
+	const { stateValidity, handleSubmit } = useFormSubmit({
 		onValidate: validateForm,
 		onSuccess: (data) => filter(data),
-		inputRef
+		inputRef:inputRef as RefObject<HTMLInputElement>
 	});
 
 	return(
@@ -30,8 +32,8 @@ export function Login(){
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_login'])}>
 
-				<Input ref={inputRef} type="text" isValid={formValidity} inputType={formLogin} text="Ваше имя"/>
-				<Button text="Войти в профиль"/>
+				<Input ref={inputRef} type="text" isValid={stateValidity} inputType={formLogin} text="Ваше имя"/>
+				<Button>Войти в профиль</Button>
 			
 			</Form>
 		</section>
