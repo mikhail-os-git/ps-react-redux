@@ -1,0 +1,16 @@
+.site-button {
+	border: 2px solid #7b6ef6;
+	border-radius: 12px;
+	padding: 16px 32px;
+	background: #7b6ef6;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 150%;
+	color: #fff;
+	cursor: pointer;
+}
+
+.site-button:hover{
+	background: #6158b7;
+	border-color: #6158b7;
+} 
