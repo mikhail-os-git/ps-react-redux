@@ -1,5 +1,5 @@
 import type{ ReactNode } from "react";
-import type { IUser } from "../types/user";
+import type { IUser } from "../../types/user";
 
 export interface IUserContextProps {
 	children: ReactNode

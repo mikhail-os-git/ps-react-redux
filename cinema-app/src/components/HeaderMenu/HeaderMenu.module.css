@@ -25,9 +25,11 @@
 }
 
 .menu-item__link:hover {
+	color: #cdd9d7;
+}
+.active {
 	color: #fff;
 }
-
 .menu-item__count {
 	color: #fff;
 	padding: 0px 7px;

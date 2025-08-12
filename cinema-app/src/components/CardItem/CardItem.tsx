@@ -9,7 +9,7 @@ export function CardItem({item}: CardItemProps){
 
 	const isFavorite = item.favorite;
 	const favorite = (
-		<div className={cn(styles['card-item__favorite'],styles['favorite'])}>
+		<button className={cn(styles['card-item__favorite'],styles['favorite'])}>
 			<img
 				className={styles['favorite__icon']}
 				src={
@@ -23,13 +23,13 @@ export function CardItem({item}: CardItemProps){
 						: 'иконка добавить в избранное'
 				}
 			/>
-			<a className={
+			<p className={
 				cn(styles['favorite__text'], {
 					[styles['isFavorite']]: isFavorite
 				})}>
 				{isFavorite ? 'В избранном' : 'В избранное'}
-			</a>
-		</div>
+			</p>
+		</button>
 	);
 
 	return (

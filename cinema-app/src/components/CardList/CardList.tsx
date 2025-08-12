@@ -19,12 +19,12 @@ export function CardList({items}: CardListProps) {
 
 	</div>;
 
-	if(items.length > 0){
+	if(items && items.length){
 		
 		list = (
 			<ul className={styles['card-list']}>
 				{items.map(item => (
-					<CardButton key={item.id}>
+					<CardButton to={`/movie/${item.id}`} key={item.id}>
 						<CardItem item={item} />
 					</CardButton>
 				))}

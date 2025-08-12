@@ -1,7 +1,7 @@
 import styles from'./Search.module.css';
 import styleForm from '../Form/Form.module.css';
 import cn from 'classnames';
-import { useRef, type RefObject } from 'react';
+import { useContext, useRef, type RefObject } from 'react';
 import { useFormSubmit } from '../../hooks/useFormSubmit.hook';
 import { validateForm } from '../Form/validationForm';
 import {Title} from '../Title/Title';
@@ -9,15 +9,21 @@ import { Paragraph } from '../Paragraph/Paragraph';
 import { Form } from '../Form/Form';
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
+import { MovieContext } from '../../context/MovieContext/movie.context';
 
 
-export function Search({actionFunc} : {actionFunc: (args: string) => void}){
+export function Search(){
+
+	const context = useContext(MovieContext);
+
+	const filterItems = context?.filterItems;
+	
+
 	const inputRef = useRef<HTMLInputElement>(null);
 	const formSearch = 'search';
-
 	const { stateValidity, handleSubmit } = useFormSubmit({
 		onValidate: validateForm,
-		onSuccess: (data) => actionFunc(data),
+		onSuccess: (data) => data? filterItems?.(data) : ()=>{},
 		inputRef:inputRef as RefObject<HTMLInputElement>
 	});
 

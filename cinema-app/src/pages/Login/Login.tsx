@@ -1,14 +1,14 @@
 import styles from'./Login.module.css';
-import styleForm from '../Form/Form.module.css';
+import styleForm from '../../components/Form/Form.module.css';
 import cn from 'classnames';
 import { type RefObject, useContext, useRef } from 'react';
 import { useFormSubmit } from '../../hooks/useFormSubmit.hook';
-import { validateForm } from '../Form/validationForm';
-import { Title } from '../Title/Title';
-import { Form } from '../Form/Form';
-import {Input} from '../Input/Input';
-import {Button} from '../Button/Button';
-import { UserContext } from '../../context/user.context';
+import { validateForm } from '../../components/Form/validationForm';
+import { Title } from '../../components/Title/Title';
+import { Form } from '../../components/Form/Form';
+import {Input} from '../../components/Input/Input';
+import {Button} from '../../components/Button/Button';
+import { UserContext } from '../../context/UserContext/user.context';
 
 export const Login: React.FC = () =>{
 	const inputRef = useRef<HTMLInputElement>(null);

@@ -1,12 +1,6 @@
-import { useState } from 'react';
-import './App.css';
-import { Header } from './components/Header/Header';
-import { Search } from './components/Search/Search';
-import { CardList } from './components/CardList/CardList';
-import { Login } from './pages/Login/Login';
-import { UserContextProvider } from './context/user.context';
-import type { IItem } from './types/item';
-
+import { createContext, useState } from "react";
+import type { IItem } from "../../types/item";
+import type { IMovieContext, IMovieContextProvider } from "./movie.context.props";
 
 const INIT_DATA = [
 	{
@@ -67,29 +61,34 @@ const INIT_DATA = [
 	}
 ];
 
+export const MovieContext = createContext<IMovieContext | null>(null);
 
 
 
-function App() {
+export const MovieContextProvider= ({children}: IMovieContextProvider) => {
+	
 	const [cardItems, setSearchItems] = useState<IItem[]>(INIT_DATA);
 
-
 	const filterItems = (itemName: string) => {
-		setSearchItems(oldItems => [...oldItems].filter(i =>i.name.toLowerCase() === itemName.toLowerCase()));
+			setSearchItems(oldItems => [...oldItems].filter(i =>i.name.toLowerCase() === itemName.toLowerCase()));
 	};
+
+	const findByIndex = (id: number): IItem | undefined => {
+		return cardItems.find((item: IItem) => item.id === id);
+	}
+
+	const getFavorites = (): IItem[] | undefined => {
+		return cardItems.filter(item => item.favorite === true);
+	}
+	const reset = () => {
+		setSearchItems([...INIT_DATA]);
+	}
 
 
 	return (
-		<UserContextProvider>
-			<Header/>
-			<main className="main">
-				{/* <Search actionFunc={filterItems}/>
-				<CardList items={cardItems}/>
-				<Login/> */}
 
-			</main>
-		</UserContextProvider>
-	);
+		<MovieContext.Provider value={{items: cardItems, filterItems, findByIndex, getFavorites, reset }}>
+			{children}
+		</MovieContext.Provider>
+	)
 }
-
-export default App;

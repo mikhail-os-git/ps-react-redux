@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState} from 'react';
-import type { IUser } from '../types/user';
-import { useLocalStorage } from '../hooks/useLocalStorage.hook';
+import type { IUser } from '../../types/user';
+import { useLocalStorage } from '../../hooks/useLocalStorage.hook';
 import type { IUserContext, IUserContextProps } from './user.context.props';
 
 
