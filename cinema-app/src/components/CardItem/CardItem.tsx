@@ -4,12 +4,13 @@ import likeIcon from '/public/cardlist/card-icons/like.svg';
 import starIcon from '/public/cardlist/card-icons/star.svg';
 import cn from 'classnames';
 import type { CardItemProps } from './CardItem.props';
+import { Button } from '../Button/Button';
 
 export function CardItem({item}: CardItemProps){
 
 	const isFavorite = item.favorite;
 	const favorite = (
-		<button className={cn(styles['card-item__favorite'],styles['favorite'])}>
+		<Button className={cn(styles['card-item__favorite'],styles['favorite'])}>
 			<img
 				className={styles['favorite__icon']}
 				src={
@@ -29,7 +30,7 @@ export function CardItem({item}: CardItemProps){
 				})}>
 				{isFavorite ? 'В избранном' : 'В избранное'}
 			</p>
-		</button>
+		</Button>
 	);
 
 	return (

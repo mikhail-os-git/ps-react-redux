@@ -10,6 +10,7 @@ import {Input} from '../../components/Input/Input';
 import {Button} from '../../components/Button/Button';
 import { UserContext } from '../../context/UserContext/user.context';
 
+
 export const Login: React.FC = () =>{
 	const inputRef = useRef<HTMLInputElement>(null);
 	const formLogin = 'login';
@@ -18,10 +19,17 @@ export const Login: React.FC = () =>{
 
 	const filter = context!.filter;
 
-	const { stateValidity, handleSubmit } = useFormSubmit({
-		onValidate: validateForm,
+
+	//#region  wit use custom validation
+	// const { stateValidity, handleSubmit } = useFormSubmit({
+	// 	onValidate: validateForm,
+	// 	onSuccess: (data) => filter(data),
+	// 	inputRef:inputRef as RefObject<HTMLInputElement>
+	// });
+	//#endregion
+
+	const { handleSubmit } = useFormSubmit({
 		onSuccess: (data) => filter(data),
-		inputRef:inputRef as RefObject<HTMLInputElement>
 	});
 
 	return(
@@ -32,7 +40,9 @@ export const Login: React.FC = () =>{
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_login'])}>
 
-				<Input ref={inputRef} type="text" isValid={stateValidity} inputType={formLogin} text="Ваше имя"/>
+				{/* <Input ref={inputRef} type="text" isValid={stateValidity} inputType={formLogin} text="Ваше имя"/> */}
+				<Input type="text" inputType={formLogin} text="Ваше имя"/>
+
 				<Button>Войти в профиль</Button>
 			
 			</Form>

@@ -9,22 +9,26 @@ import { Paragraph } from '../Paragraph/Paragraph';
 import { Form } from '../Form/Form';
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
-import { MovieContext } from '../../context/MovieContext/movie.context';
+import { useMovie } from '../../context/MovieContext/movie.context';
 
 
 export function Search(){
 
-	const context = useContext(MovieContext);
-
-	const filterItems = context?.filterItems;
+	const {filterItems} = useMovie();
 	
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	// const inputRef = useRef<HTMLInputElement>(null);
+	//#region old with use custom validation
 	const formSearch = 'search';
-	const { stateValidity, handleSubmit } = useFormSubmit({
-		onValidate: validateForm,
-		onSuccess: (data) => data? filterItems?.(data) : ()=>{},
-		inputRef:inputRef as RefObject<HTMLInputElement>
+	// const { stateValidity, handleSubmit } = useFormSubmit({
+	// 	onValidate: validateForm,
+	// 	onSuccess: (data) => data? filterItems?.(data) : ()=>{},
+	// 	inputRef:inputRef as RefObject<HTMLInputElement>
+	// });
+	//#endregion
+
+	const { handleSubmit } = useFormSubmit({
+		onSuccess: (data) => filterItems(data),
 	});
 
 	return(
@@ -36,7 +40,9 @@ export function Search(){
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_search'])}>
 
-				<Input ref={inputRef} type="text" isValid={stateValidity} inputType={formSearch} text="Введите название"/>
+				{/* <Input ref={inputRef} type="text" isValid={stateValidity} inputType={formSearch} text="Введите название"/> */}
+				<Input type="text" inputType={formSearch} text="Введите название"/>
+				
 				<Button>Искать</Button>
 			
 			</Form>

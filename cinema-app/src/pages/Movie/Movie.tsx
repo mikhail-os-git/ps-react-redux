@@ -1,6 +1,5 @@
-import {  useContext } from "react";
 import { useParams } from "react-router-dom"
-import { MovieContext } from "../../context/MovieContext/movie.context";
+import { useMovie } from "../../context/MovieContext/movie.context";
 import type { IItem } from "../../types/item";
 import styles from './Movie.module.css';
 import { Paragraph } from "../../components/Paragraph/Paragraph";
@@ -8,21 +7,20 @@ import bookmarkIcon from '/public/cardlist/card-icons/bookmark.svg';
 import likeIcon from '/public/cardlist/card-icons/like.svg';
 import starIcon from '/public/cardlist/card-icons/star.svg';
 import cn from 'classnames';
+import { Button } from "../../components/Button/Button";
 
 export function Movie() {
 
 	const {id} = useParams();
 
-	const context = useContext(MovieContext); 
-
-	const findByIndex = context!.findByIndex;
+	const {findByIndex} = useMovie(); 
 
 	const item: IItem | undefined = findByIndex(Number(id));
 
 	const isFavorite: boolean = Boolean(item?.favorite);
 
 	const favorite = (
-		<button className={styles['favorite']}>
+		<Button className={styles['favorite']}>
 			<img
 				src={
 					isFavorite
@@ -41,7 +39,7 @@ export function Movie() {
 				})}>
 				{isFavorite ? 'В избранном' : 'В избранное'}
 			</p>
-		</button>
+		</Button>
 	);
 
 	let movie = item ? (

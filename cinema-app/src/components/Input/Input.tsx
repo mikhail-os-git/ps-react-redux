@@ -4,16 +4,30 @@ import cn from 'classnames';
 import type { InputProps } from './Input.props';
 
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({inputType = '', text = '', isValid = true, ...props}, ref) {
+// export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({inputType = '', text = '', ...props}, ref) {
+
+// 	const isSearch = inputType === 'search';
+
+// 	const name = isSearch ? 'search-input' : 'login-input';
+
+// 	return (
+// 		<input {...props} name={name} ref = {ref} className={cn(styles['input'], {
+// 			[styles['input_search']]: isSearch
+// 		})} placeholder={text} required/>
+		
+// 	);
+// });
+
+export function Input({inputType = '', text = '', ...props}) {
 
 	const isSearch = inputType === 'search';
 
 	const name = isSearch ? 'search-input' : 'login-input';
 
 	return (
-		<input {...props} name={name} ref = {ref} className={cn(styles['input'], {
-			[styles['input_search']]: isSearch,
-			[styles['invalid']]: !isValid
-		})} placeholder={text}/>
+		<input {...props} name={name} className={cn(styles['input'], {
+			[styles['input_search']]: isSearch
+		})} placeholder={text} required/>
+		
 	);
-});
+};

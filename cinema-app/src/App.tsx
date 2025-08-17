@@ -4,7 +4,7 @@ import { Header } from './components/Header/Header';
 import { Search } from './components/Search/Search';
 import { CardList } from './components/CardList/CardList';
 import { Login } from './pages/Login/Login';
-import { UserContextProvider } from './context/user.context';
+import { UserContextProvider } from './context/UserContext/user.context';
 import type { IItem } from './types/item';
 
 

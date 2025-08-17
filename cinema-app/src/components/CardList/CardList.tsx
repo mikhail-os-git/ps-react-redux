@@ -9,19 +9,20 @@ import { Paragraph } from '../Paragraph/Paragraph';
 
 
 export function CardList({items}: CardListProps) {
-	
-	// let list: JSX.Element | JSX.Element[] = <p className={styles['card-list__info']}>Ничего не найдено</p>;
 
-	let list: JSX.Element | JSX.Element[] = <div className={styles['card-list__info']}>
+	if(!items || !items.length){
+	return (
+    	<section className={styles.cards}>
+        <div>
+				<Title text="Упс... Ничего не найдено"/>
+				<Paragraph text='Попробуйте изменить запрос или ввести более точное название фильма'/>
+            </div>
+    	</section>
+    )
+}
 
-		<Title text="Упс... Ничего не найдено"/>
-		<Paragraph text='Попробуйте изменить запрос или ввести более точное название фильма'/>
-
-	</div>;
-
-	if(items && items.length){
-		
-		list = (
+return (
+        <section className={styles.cards}>
 			<ul className={styles['card-list']}>
 				{items.map(item => (
 					<CardButton to={`/movie/${item.id}`} key={item.id}>
@@ -29,12 +30,6 @@ export function CardList({items}: CardListProps) {
 					</CardButton>
 				))}
 			</ul>
-		);
-	}
-
-	return(
-		<section className={styles['cards']}>
-				{list}
-		</section>
-	);
+    	</section>
+)
 }
