@@ -9,7 +9,10 @@ import { Favorites } from './pages/Favorites/Favorites.tsx';
 import { Movie } from './pages/Movie/Movie.tsx';
 import { Login } from './pages/Login/Login.tsx';
 import { Error } from './pages/Error/Error.tsx';
-import { MovieContextProvider } from './context/MovieContext/movie.context.tsx';
+import { MovieContextProvider, useMovie } from './context/MovieContext/movie.context.tsx';
+import axios from 'axios';
+import { DETAILS_PREFIX } from './helpers/API.ts';
+import type { IMovieDetails } from './types/movie.details';
 
 const router = createBrowserRouter([
 	{
@@ -26,7 +29,10 @@ const router = createBrowserRouter([
 			}, 
 			{
 				path: '/movie/:id',
-				element: <Movie/>
+				element: <Movie/>,
+				loader:async ({params}) => {
+					return await axios.get<IMovieDetails>(DETAILS_PREFIX+params.id).then(res => res.data );
+				}
 			},
 			{
 				path: '/login',

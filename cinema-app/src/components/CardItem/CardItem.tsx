@@ -8,7 +8,7 @@ import { Button } from '../Button/Button';
 
 export function CardItem({item}: CardItemProps){
 
-	const isFavorite = item.favorite;
+	const isFavorite = Boolean(item?.favorite);
 	const favorite = (
 		<Button className={cn(styles['card-item__favorite'],styles['favorite'])}>
 			<img
@@ -35,15 +35,15 @@ export function CardItem({item}: CardItemProps){
 
 	return (
 		<li className={cn(styles['card-list__item'], styles['card-item'])}>
-			<img src={item.image} alt={'картинка фильма' + item.name} />
+			<img src={item['#IMG_POSTER']} alt={'картинка фильма' + item['#TITLE']} />
 
 			<div className={styles['card-item__rating']}>
 				<img src={starIcon} alt="иконка рейтинга" />
-				<p>{item.rating}</p>
+				<p>{item['#RANK']}</p>
 			</div>
 
 			<div className={styles['card-item__info']}>
-				<h3 className={styles['card-item__name']}>{item.name}</h3>
+				<h3 className={styles['card-item__name']}>{item['#TITLE']}</h3>
 
 				{favorite}
 			</div>

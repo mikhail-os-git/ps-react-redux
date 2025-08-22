@@ -1,10 +1,14 @@
 .card-list__item {
 	position: relative;
 	display: flex;
+	/* justify-content: space-between; */
 	flex-direction: column;
 	gap: 16px;
+	height: 100%; 
 }
-
+.card-list__item > img {
+	max-width: 266px;
+}
 .card-item__rating{
 	position: absolute;
 	top: 8px;
@@ -28,8 +32,9 @@
 .card-item__info{
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	/* gap: 16px; */
 	padding: 0 8px;
+	margin-top: auto;
 }
 
 .card-item__favorite {

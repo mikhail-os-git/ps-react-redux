@@ -6,14 +6,14 @@ import { Title } from "../../components/Title/Title";
 import styles from './Favorites.module.css';
 
 export function Favorites() {
-	// const {getFavorites, reset} = useContext(MovieContext) as IMovieContext;
-	const {getFavorites} = useMovie();
-	const favoriteItems = getFavorites();
+	const {items} = useMovie();
+
+	const favoriteItems = items?.filter(i => i?.favorite === true);
 	
 	return(
 		<section className={styles["favorites"]}>
 			<Title text="Избранное"/>
-			{favoriteItems?.length && <CardList items={favoriteItems}/>}
+			{ favoriteItems != null && <CardList items={favoriteItems}/>}
 		</section>
 	)
 }

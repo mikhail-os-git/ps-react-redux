@@ -11,10 +11,11 @@ import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
 import { useMovie } from '../../context/MovieContext/movie.context';
 
+//#region with use context
 
 export function Search(){
 
-	const {filterItems} = useMovie();
+	const {search} = useMovie();
 	
 
 	// const inputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +29,7 @@ export function Search(){
 	//#endregion
 
 	const { handleSubmit } = useFormSubmit({
-		onSuccess: (data) => filterItems(data),
+		onSuccess: (data) => search(data),
 	});
 
 	return(
@@ -49,3 +50,4 @@ export function Search(){
 		</section>
 	);
 }
+//#endregion
