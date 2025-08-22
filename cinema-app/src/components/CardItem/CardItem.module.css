@@ -36,6 +36,8 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
+	background-color: inherit;
+	border: none;
 }
 
 .card-item__favorite {
@@ -58,8 +60,19 @@
 	line-height: 150%;
 	letter-spacing: 0.02em;
 	color: #7b6ef6;
+	
+}
+
+.favorite__text:hover {
+	color: #6b60cd;
 }
 
 .isFavorite {
 	color: #37d8a7;
 }
+
+.isFavorite:hover {
+	color: #47a085;
+}
+
+
