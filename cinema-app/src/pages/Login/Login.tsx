@@ -8,7 +8,8 @@ import { Title } from '../../components/Title/Title';
 import { Form } from '../../components/Form/Form';
 import {Input} from '../../components/Input/Input';
 import {Button} from '../../components/Button/Button';
-import { UserContext } from '../../context/UserContext/user.context';
+import { UserContext, UserContextProvider } from '../../context/UserContext/user.context';
+import { Header } from '../../components/Header/Header';
 
 
 export const Login: React.FC = () =>{
@@ -33,9 +34,7 @@ export const Login: React.FC = () =>{
 	});
 
 	return(
-
 		<section className={styles['login']}>
-
 			<Title text="Вход"/>
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_login'])}>

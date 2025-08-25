@@ -2,6 +2,7 @@ import {createContext, useEffect, useState} from 'react';
 import type { IUser } from '../../types/user';
 import { useLocalStorage } from '../../hooks/useLocalStorage.hook';
 import type { IUserContext, IUserContextProps } from './user.context.props';
+import { useNavigate } from 'react-router-dom';
 
 
 export const UserContext = createContext<IUserContext | null>(null);
@@ -10,7 +11,7 @@ export const UserContextProvider = ({children} : IUserContextProps) => {
 
 	const [users, saveUsers] = useLocalStorage('data');
 	const [user, setUser] = useState<IUser | null>(null);
-
+	const navigate = useNavigate()
 
 	const filterUsers = (userName: string): void => {
 		const updated: IUser[] = users.map((user: IUser) => {
@@ -24,6 +25,7 @@ export const UserContextProvider = ({children} : IUserContextProps) => {
 		);
 
 		saveUsers(updated);
+		navigate('/');
 	};
 
 	const userLogout = ():void => {
@@ -32,6 +34,7 @@ export const UserContextProvider = ({children} : IUserContextProps) => {
 			isLogged: false
 		}));
 		saveUsers(logout);
+		navigate('/login');
 	};
 
 	useEffect(() => {

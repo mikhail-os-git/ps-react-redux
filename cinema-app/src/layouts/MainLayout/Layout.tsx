@@ -7,13 +7,13 @@ import { MovieContextProvider } from '../../context/MovieContext/movie.context';
 
 export function Layout() {
 	return (
-<div className={styles["layout"]}>
+	<div className={styles["layout"]}>
 		<UserContextProvider>
 				<Header/>
 				<div className={styles["content"]}>
 						<Outlet/>
 				</div>
 			</UserContextProvider>
-</div>
+	</div>
 )
 }
