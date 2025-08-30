@@ -35,7 +35,7 @@ return (
         <section className={styles.cards}>
 			<ul className={styles['card-list']}>
 				{items != null && items.map(item => (
-					<CardButton to={`/movie/${item['#IMDB_ID']}`} key={item.id}>
+					<CardButton to={`/movie/${item.imdbId}`} key={item.id}>
 						<CardItem item={item} />
 					</CardButton>
 				))}

@@ -35,15 +35,15 @@ export function CardItem({item}: CardItemProps){
 
 	return (
 		<li className={cn(styles['card-list__item'], styles['card-item'])}>
-			<img src={item['#IMG_POSTER']} alt={'картинка фильма' + item['#TITLE']} />
+			<img src={item.imgPoster} alt={'картинка фильма' + item.title} />
 
 			<div className={styles['card-item__rating']}>
 				<img src={starIcon} alt="иконка рейтинга" />
-				<p>{item['#RANK']}</p>
+				<p>{item.rank}</p>
 			</div>
 
 			<div className={styles['card-item__info']}>
-				<h3 className={styles['card-item__name']}>{item['#TITLE']}</h3>
+				<h3 className={styles['card-item__name']}>{item.title}</h3>
 
 				{favorite}
 			</div>

@@ -27,4 +27,3 @@ package-lock.json
 package.json
 vite.config.js
 tsconfig.*
-movie.details.d.ts
