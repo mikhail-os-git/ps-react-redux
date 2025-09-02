@@ -14,15 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../../store/store';
 import { search } from '../../store/movie.slice';
 
-//#region with use context
-
 export function Search(){
-
-	// const {search} = useMovie();
-
 	const dispatch = useDispatch<AppDispatch>()
-
-	// const inputRef = useRef<HTMLInputElement>(null);
 	//#region old with use custom validation
 	const formSearch = 'search';
 	// const { stateValidity, handleSubmit } = useFormSubmit({
@@ -45,7 +38,6 @@ export function Search(){
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_search'])}>
 
-				{/* <Input ref={inputRef} type="text" isValid={stateValidity} inputType={formSearch} text="Введите название"/> */}
 				<Input type="text" inputType={formSearch} text="Введите название"/>
 				
 				<Button>Искать</Button>
@@ -54,4 +46,3 @@ export function Search(){
 		</section>
 	);
 }
-//#endregion

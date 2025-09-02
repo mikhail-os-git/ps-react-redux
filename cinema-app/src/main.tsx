@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './layouts/MainLayout/Layout.tsx';
 import { MainPage } from './pages/MainPage/MainPage.tsx';
@@ -9,7 +8,6 @@ import { Favorites } from './pages/Favorites/Favorites.tsx';
 import { Movie } from './pages/Movie/Movie.tsx';
 import { Login } from './pages/Login/Login.tsx';
 import { Error } from './pages/Error/Error.tsx';
-import { MovieContextProvider, useMovie } from './context/MovieContext/movie.context.tsx';
 import axios from 'axios';
 import { DETAILS_PREFIX } from './helpers/API.ts';
 import type { IMovieDetails } from './types/movie.details';
@@ -59,12 +57,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-
-		{/* <MovieContextProvider> */}
 		<Provider store={store}>
 			<RouterProvider router={router}/>
 		</Provider>
-		{/* </MovieContextProvider> */}
-		{/* <App /> */}
 	</StrictMode>
 );
