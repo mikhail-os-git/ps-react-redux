@@ -15,12 +15,12 @@ import type { IMovieContext } from '../../context/MovieContext/movie.context.pro
 
 export function MainPage() {
 
-	const {items} = useContext(MovieContext) as IMovieContext;
+	const {loading, items} = useContext(MovieContext) as IMovieContext;
 	return (
 		<>
 			<section className={styles["main"]}>
 				<Search/>
-				<CardList items={items}/>
+				<CardList items={items} loading={loading}/>
 			</section>
 		</>
 	);

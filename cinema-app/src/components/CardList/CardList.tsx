@@ -7,10 +7,20 @@ import type { CardListProps } from './CardList.props';
 import { Paragraph } from '../Paragraph/Paragraph';
 
 
+export function CardList({items, loading = false}: CardListProps) {
+	if(!items && !loading) {
+		return;
+	}
 
-export function CardList({items}: CardListProps) {
+	if(loading) {
+		return (
+		<section className={styles.cards}>
+				<span className={styles['loader']}></span>
+		</section>
+	)
+	}
 
-	if(!items || !items.length){
+	if(items != null && !items.length){
 	return (
     	<section className={styles.cards}>
         <div>
@@ -24,8 +34,8 @@ export function CardList({items}: CardListProps) {
 return (
         <section className={styles.cards}>
 			<ul className={styles['card-list']}>
-				{items.map(item => (
-					<CardButton to={`/movie/${item.id}`} key={item.id}>
+				{items != null && items.map(item => (
+					<CardButton to={`/movie/${item.imdbId}`} key={item.id}>
 						<CardItem item={item} />
 					</CardButton>
 				))}
