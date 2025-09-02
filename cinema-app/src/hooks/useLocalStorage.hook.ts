@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-export function useLocalStorage(key: string) {
-	const [data, setData] = useState<any>([]);
+export function useLocalStorage<T>(key: string, initValue: T) {
+	const [data, setData] = useState<T>(initValue);
 
 	useEffect(() => {
 		try {
@@ -21,5 +21,5 @@ export function useLocalStorage(key: string) {
 		setData(newData);
 	};
 
-	return [data, saveData];
+	return [data, saveData] as const;
 }

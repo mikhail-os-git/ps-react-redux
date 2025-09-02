@@ -10,13 +10,17 @@ import { Form } from '../Form/Form';
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
 import { useMovie } from '../../context/MovieContext/movie.context';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch } from '../../store/store';
+import { search } from '../../store/movie.slice';
 
 //#region with use context
 
 export function Search(){
 
-	const {search} = useMovie();
-	
+	// const {search} = useMovie();
+
+	const dispatch = useDispatch<AppDispatch>()
 
 	// const inputRef = useRef<HTMLInputElement>(null);
 	//#region old with use custom validation
@@ -29,7 +33,7 @@ export function Search(){
 	//#endregion
 
 	const { handleSubmit } = useFormSubmit({
-		onSuccess: (data) => search(data),
+		onSuccess: (data) => dispatch(search({name: data}))
 	});
 
 	return(

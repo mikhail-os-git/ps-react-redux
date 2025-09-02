@@ -5,12 +5,29 @@ import starIcon from '/public/cardlist/card-icons/star.svg';
 import cn from 'classnames';
 import type { CardItemProps } from './CardItem.props';
 import { Button } from '../Button/Button';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../../store/store';
+import type { IMovie } from '../../types/movie';
+import { movieActions } from '../../store/movie.slice';
+import type { MouseEvent } from 'react';
 
 export function CardItem({item}: CardItemProps){
 
+	const dispatch = useDispatch<AppDispatch>();
+
+	const add = (e: MouseEvent) => {
+		e.preventDefault();
+		dispatch(movieActions.addFavorit(item.id));
+	}
+
+	const remove = (e: MouseEvent) => {
+		e.preventDefault();
+		dispatch(movieActions.removeFavorit(item.id))
+	}
+
 	const isFavorite = Boolean(item?.favorite);
 	const favorite = (
-		<Button className={cn(styles['card-item__favorite'],styles['favorite'])}>
+		<Button className={cn(styles['card-item__favorite'],styles['favorite'])} onClick={item.favorite === true ? remove : add}>
 			<img
 				className={styles['favorite__icon']}
 				src={
@@ -35,15 +52,15 @@ export function CardItem({item}: CardItemProps){
 
 	return (
 		<li className={cn(styles['card-list__item'], styles['card-item'])}>
-			<img src={item['#IMG_POSTER']} alt={'картинка фильма' + item['#TITLE']} />
+			<img src={item.imgPoster} alt={'картинка фильма' + item.title} />
 
 			<div className={styles['card-item__rating']}>
 				<img src={starIcon} alt="иконка рейтинга" />
-				<p>{item['#RANK']}</p>
+				<p>{item.rank}</p>
 			</div>
 
 			<div className={styles['card-item__info']}>
-				<h3 className={styles['card-item__name']}>{item['#TITLE']}</h3>
+				<h3 className={styles['card-item__name']}>{item.title}</h3>
 
 				{favorite}
 			</div>

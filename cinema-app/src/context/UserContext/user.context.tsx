@@ -9,7 +9,7 @@ export const UserContext = createContext<IUserContext | null>(null);
 
 export const UserContextProvider = ({children} : IUserContextProps) => {
 
-	const [users, saveUsers] = useLocalStorage('data');
+	const [users, saveUsers] = useLocalStorage<IUser[]>('data', []);
 	const [user, setUser] = useState<IUser | null>(null);
 	const navigate = useNavigate()
 
@@ -39,8 +39,8 @@ export const UserContextProvider = ({children} : IUserContextProps) => {
 
 	useEffect(() => {
 		if (Array.isArray(users)) {
-			const user: IUser = users.find((user: IUser) => user.isLogged === true);
-			if (user) {
+			if(users.find((user: IUser) => user.isLogged === true)) {
+				const user: IUser = users.find((user: IUser) => user.isLogged === true) as IUser;
 				setUser(user);
 			} else {
 				setUser(null); // если никто не залогинен

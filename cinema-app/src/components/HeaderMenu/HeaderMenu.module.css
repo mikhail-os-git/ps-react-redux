@@ -30,9 +30,10 @@
 .active {
 	color: #fff;
 }
+
 .menu-item__count {
 	color: #fff;
-	padding: 0px 7px;
+	padding: 1px 8px;
 	border-radius: 50%;
 	background-color: #7b6ef6;
 }

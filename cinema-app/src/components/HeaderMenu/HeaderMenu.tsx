@@ -6,6 +6,8 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../context/UserContext/user.context';
 import type { IUser } from '../../types/user';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store';
 
 export const HeaderMenu: React.FC = () =>{
 
@@ -13,6 +15,8 @@ export const HeaderMenu: React.FC = () =>{
 
 	const user = context?.user;
 	const logout = context?.logout;
+
+	const count = useSelector((s: RootState) => s.movie.favorites.length);
 
 	let userItem;
 	let button = <NavLink to='/login' className={({isActive}) => cn(styles['menu-item__link'], 
@@ -47,11 +51,11 @@ export const HeaderMenu: React.FC = () =>{
 					)}>Поиск фильмов</NavLink>
 				</li>
 				<li className={cn(styles['header-menu__item'],styles['menu-item'])}>
-					<NavLink to='/favorites' className={({isActive})=> cn(styles['menu-item__link'], 
+					<NavLink to='/favorites' className={({isActive})=> cn(styles['favorite_link'],styles['menu-item__link'], 
 						{[styles['active']]: isActive}
 					)}>Мои фильмы
 
-						<div className={styles['menu-item__count']}>2</div>
+						<div className={styles['menu-item__count']}>{count}</div>
 
 					</NavLink>
 				</li>

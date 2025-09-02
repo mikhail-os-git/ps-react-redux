@@ -6,6 +6,8 @@ import { CardList } from '../../components/CardList/CardList';
 import type { IItem } from '../../types/item';
 import { MovieContext, MovieContextProvider } from '../../context/MovieContext/movie.context';
 import type { IMovieContext } from '../../context/MovieContext/movie.context.props';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store';
 
 
 
@@ -15,12 +17,13 @@ import type { IMovieContext } from '../../context/MovieContext/movie.context.pro
 
 export function MainPage() {
 
-	const {loading, items} = useContext(MovieContext) as IMovieContext;
+	const {loading, movies} = useSelector((s: RootState) => s.movie);
+
 	return (
 		<>
 			<section className={styles["main"]}>
 				<Search/>
-				<CardList items={items} loading={loading}/>
+				<CardList items={movies} loading={loading}/>
 			</section>
 		</>
 	);

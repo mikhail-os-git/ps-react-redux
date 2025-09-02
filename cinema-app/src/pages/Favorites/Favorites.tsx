@@ -4,16 +4,15 @@ import type { IMovieContext } from "../../context/MovieContext/movie.context.pro
 import { CardList } from "../../components/CardList/CardList";
 import { Title } from "../../components/Title/Title";
 import styles from './Favorites.module.css';
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 export function Favorites() {
-	const {items} = useMovie();
-
-	const favoriteItems = items?.filter(i => i?.favorite === true);
-	
+	const favorites = useSelector((s: RootState) => s.movie.favorites);
 	return(
 		<section className={styles["favorites"]}>
 			<Title text="Избранное"/>
-			{ favoriteItems != null && <CardList items={favoriteItems}/>}
+			{ favorites!= null && <CardList items={favorites}/>}
 		</section>
 	)
 }

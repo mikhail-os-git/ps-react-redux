@@ -15,6 +15,8 @@ import { DETAILS_PREFIX } from './helpers/API.ts';
 import type { IMovieDetails } from './types/movie.details';
 import { RequireAuth } from './helpers/RequireAuth.tsx';
 import { LoginLayout } from './layouts/LoginLayout/LoginLayout.tsx';
+import { Provider } from 'react-redux';
+import { store } from './store/store.ts';
 
 const router = createBrowserRouter([
 	{
@@ -57,9 +59,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<MovieContextProvider>
+
+		{/* <MovieContextProvider> */}
+		<Provider store={store}>
 			<RouterProvider router={router}/>
-		</MovieContextProvider>
+		</Provider>
+		{/* </MovieContextProvider> */}
 		{/* <App /> */}
 	</StrictMode>
 );
