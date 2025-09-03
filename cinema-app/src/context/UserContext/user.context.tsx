@@ -40,7 +40,7 @@ export const UserContextProvider = ({children} : IUserContextProps) => {
 	useEffect(() => {
 		if (Array.isArray(users)) {
 			if(users.find((user: IUser) => user.isLogged === true)) {
-				const user: IUser = users.find((user: IUser) => user.isLogged === true) as IUser;
+				const user: IUser = users.find((user: IUser) => user.isLogged) as IUser;
 				setUser(user);
 			} else {
 				setUser(null); // если никто не залогинен

@@ -13,9 +13,10 @@ import { useMovie } from '../../context/MovieContext/movie.context';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../../store/store';
 import { search } from '../../store/movie.slice';
+import { useMovies } from '../../hooks/useMovies.hook';
 
 export function Search(){
-	const dispatch = useDispatch<AppDispatch>()
+	const {doSearch} = useMovies();
 	//#region old with use custom validation
 	const formSearch = 'search';
 	// const { stateValidity, handleSubmit } = useFormSubmit({
@@ -26,7 +27,7 @@ export function Search(){
 	//#endregion
 
 	const { handleSubmit } = useFormSubmit({
-		onSuccess: (data) => dispatch(search({name: data}))
+		onSuccess: (data) => doSearch(data)
 	});
 
 	return(
