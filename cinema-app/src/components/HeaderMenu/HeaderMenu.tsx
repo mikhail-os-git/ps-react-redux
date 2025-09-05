@@ -2,19 +2,14 @@ import styles from './HeaderMenu.module.css';
 import cn from 'classnames';
 
 import userIcon from '../../../public/header/user-icon.svg';
-import React, { useContext } from 'react';
-import { UserContext } from '../../context/UserContext/user.context';
-import type { IUser } from '../../types/user';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store/store';
+import { useUsers } from '../../hooks/useUsers.hook';
 
 export const HeaderMenu: React.FC = () =>{
-
-	const context = useContext(UserContext);
-
-	const user = context?.user;
-	const logout = context?.logout;
+	const {username, logout} = useUsers();
 
 	const count = useSelector((s: RootState) => s.movie.favorites.length);
 
@@ -27,13 +22,13 @@ export const HeaderMenu: React.FC = () =>{
 	Войти
 		<img className={styles['menu-item__img']} src="../../../public/header/menu-icon-logout.svg" alt="Иконка Входа" />
 	</NavLink>;
-	if(user){
+	if(username){
 		button = <a onClick={logout} href="#" className={styles['menu-item__link']}>
 		Выйти
 		</a>;
 
 		userItem = <li className={cn(styles['header-menu__item'],styles['menu-item'])}>
-			<a href="#" className={styles['menu-item__link']}>{user?.username}
+			<a href="#" className={styles['menu-item__link']}>{username}
 				<img src={userIcon} alt="иконка пользователя" />
 			</a>
 		</li>;

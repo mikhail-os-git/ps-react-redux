@@ -35,10 +35,15 @@
 	margin-bottom: 35px;
 }
 
+
+
 .body > * {
 	flex: 1 1;
 }
-
+.body > img {
+	border-radius: 24px;
+	max-width: 480px;
+}
 .right {
 	display: flex;
 	flex-direction: column;

@@ -11,89 +11,115 @@ import { Button } from "../../components/Button/Button";
 import type { IMovieDetails } from "../../types/movie.details";
 import { Suspense } from "react";
 import type { IMovie } from "../../types/movie";
+import { useMovies } from "../../hooks/useMovies.hook";
 
 export function Movie() {
 
 	const data = useLoaderData() as IMovieDetails;
-	const navigation = useNavigation();
+	const {movies, add, remove} = useMovies();
+	const film = movies?.find(m => m.imdbId === data.imdbId);
+	const addFavorite = () => {
+		if(film != null) {
+			add(film.id);
+		}
+	}
 
-	//#region  Страница сделана, нужно только подставить потом значения!
-	// const isFavorite: boolean = Boolean(data?.favorite);
+	const removeFavorite = () => {
+		if(film != null) {
+			remove(film.id);
+		}
+	}
 
-	// const favorite = (
-	// 	<Button className={styles['favorite']}>
-	// 		<img
-	// 			src={
-	// 				isFavorite
-	// 					? bookmarkIcon
-	// 					: likeIcon
-	// 			}
-	// 			alt={
-	// 				isFavorite
-	// 					? 'иконка в избранном'
-	// 					: 'иконка добавить в избранное'
-	// 			}
-	// 		/>
-	// 		<p className={
-	// 			cn(styles['favorite__text'], {
-	// 				[styles['isFavorite']]: isFavorite
-	// 			})}>
-	// 			{isFavorite ? 'В избранном' : 'В избранное'}
-	// 		</p>
-	// 	</Button>
-	// );
+	function parseDuration(duration: string): string {
+  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
 
-	// let movie = item ? (
-	// 	<section className={styles["movie"]}>
-	// 		<div className={styles["head"]}>
-	// 			<p >Поиск фильмов</p>
-	// 			<h3 className={styles["name"]}>{item.name}</h3>
-	// 		</div>
-	// 		<div className={styles["body"]}>
-	// 			<img src={item.image} alt={"Картинка фильма " + item.name} />
-	// 			<div className={styles["right"]}>
-	// 				<Paragraph fontSize='20px' text = 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur perferendis voluptatem culpa? Distinctio quod iure voluptate quaerat quas cum? Voluptatem deleniti facere veniam itaque dolorum architecto, quaerat vitae ad distinctio?'/>
-	// 				<div className={styles['action']}>
-	// 					<div className={styles['rating']}>
-	// 						<img src={starIcon} alt="иконка рейтинга" />
-	// 						<p>{item.rating}</p>
-	// 					</div>
-	// 					{favorite}
-	// 				</div>
-	// 				<div>
-	// 					<p className={styles["describe"]}>Тип</p>
-	// 					<p className={styles["text"]}>Movie</p>
-	// 				</div>
-	// 				<div>
-	// 					<p className={styles["describe"]}>Дата выхода</p>
-	// 					<p className={styles["text"]}>2019-04-24</p>
-	// 				</div>
+  if (!match) return "0 Min";
 
-	// 				<div>
-	// 					<p className={styles["describe"]}>Длительность</p>
-	// 					<p className={styles["text"]}>181 мин</p>
-	// 				</div>
+  const hours = parseInt(match[1] || "0", 10);
+  const minutes = parseInt(match[2] || "0", 10);
+  const seconds = parseInt(match[3] || "0", 10);
 
-	// 				<div>
-	// 					<p className={styles["describe"]}>Жанр</p>
-	// 					<p className={styles["text"]}>Adventure,  Science Fiction, Action</p>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 		<div className={styles["foot"]}>
-	// 		<p className={styles["describe"]}>Отзывы</p>
-	// 		<div className={styles["reviews"]}>
-	// 			<div className={styles["reviews__info"]}>
-	// 				<h4 className={styles["reviews__title"]}>Not as good as infinity war..</h4>
-	// 				<p className={styles["describe"]}>2019-04-29</p>
-	// 			</div>
-	// 			<Paragraph fontSize="20px" text="But its a pretty good film. A bit of a mess in some parts, lacking the cohesive and effortless feel infinity war somehow managed to accomplish. Some silly plot holes and characters that could&apos;ve been cut (Ahem, captain marvel and thanos). The use of Captain marvel in this film was just ridiculous. Shes there at the start, bails for some reason? And then pops up at the end to serve no purpose but deux ex machina a space ship..."/>
-	// 		</div>
+  const totalMinutes = hours * 60 + minutes + Math.floor(seconds / 60);
 
-	// 		</div>
+  return `${totalMinutes} Min`;
+}
 
-	// 	</section>
-	// ): '';
+	const isFavorite: boolean = Boolean(film?.favorite);
+
+	const favorite = (
+		<Button onClick={isFavorite ? removeFavorite : addFavorite } className={styles['favorite']}>
+			<img
+				src={
+					isFavorite
+						? bookmarkIcon
+						: likeIcon
+				}
+				alt={
+					isFavorite
+						? 'иконка в избранном'
+						: 'иконка добавить в избранное'
+				}
+			/>
+			<p className={
+				cn(styles['favorite__text'], {
+					[styles['isFavorite']]: isFavorite
+				})}>
+				{isFavorite ? 'В избранном' : 'В избранное'}
+			</p>
+		</Button>
+	);
+
+	let movie = data ? (
+		<section className={styles["movie"]}>
+			<div className={styles["head"]}>
+				<p >Поиск фильмов</p>
+				<h3 className={styles["name"]}>{data.short.name}</h3>
+			</div>
+			<div className={styles["body"]}>
+				<img src={data.short.image} alt={"Картинка фильма " + data.short.name} />
+				<div className={styles["right"]}>
+					<Paragraph fontSize='20px' text = {data.short.description}/>
+					<div className={styles['action']}>
+						<div className={styles['rating']}>
+							<img src={starIcon} alt="иконка рейтинга" />
+							<p>{data.short.review.reviewRating.ratingValue}</p>
+						</div>
+						{favorite}
+					</div>
+					<div>
+						<p className={styles["describe"]}>Тип</p>
+						<p className={styles["text"]}>{data.short["@type"]}</p>
+					</div>
+					<div>
+						<p className={styles["describe"]}>Дата выхода</p>
+						<p className={styles["text"]}>{data.short.datePublished}</p>
+					</div>
+
+					<div>
+						<p className={styles["describe"]}>Длительность</p>
+						<p className={styles["text"]}>{parseDuration(data.short.duration)}</p>
+					</div>
+
+					<div>
+						<p className={styles["describe"]}>Жанр</p>
+						<p className={styles["text"]}>{data.short.genre.join(', ')}</p>
+					</div>
+				</div>
+			</div>
+			<div className={styles["foot"]}>
+			<p className={styles["describe"]}>Отзывы</p>
+			<div className={styles["reviews"]}>
+				<div className={styles["reviews__info"]}>
+					<h4 className={styles["reviews__title"]}>{data.short.review.name}</h4>
+					<p className={styles["describe"]}>{data.short.review.dateCreated}</p>
+				</div>
+				<Paragraph fontSize="20px" text={data.short.review.reviewBody}/>
+			</div>
+
+			</div>
+
+		</section>
+	): '';
 //#endregion
 
 	return(
@@ -104,8 +130,7 @@ export function Movie() {
 				errorElement={<div>Не можем отобразить продукт😬</div>}>
 				{(data: IMovieDetails) =>
 					(<div className={styles["head"]}>
-						<p >Поиск фильмов</p>
-						<h3 className={styles["name"]}>{data.short.name}</h3>
+						{movie}
 					</div>)
 				}
 

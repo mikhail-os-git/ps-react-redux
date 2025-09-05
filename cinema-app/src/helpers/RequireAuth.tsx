@@ -2,11 +2,11 @@ import type { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useLocalStorage } from '../hooks/useLocalStorage.hook';
 import type { IUser } from '../types/user';
+import { useUsers } from '../hooks/useUsers.hook';
 
 export const RequireAuth = ({children}: {children: ReactNode}) => {
-	
-	const data = JSON.parse(localStorage.getItem('data') as string);
-	const allow = (data as IUser[]).some(p => p.isLogged === true);
+
+	const {allow} = useUsers();
 	if(!allow) {
 		return <Navigate to="/login" replace/>;
 	}

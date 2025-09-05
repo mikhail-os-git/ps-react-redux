@@ -10,6 +10,7 @@ import {Input} from '../../components/Input/Input';
 import {Button} from '../../components/Button/Button';
 import { UserContext, UserContextProvider } from '../../context/UserContext/user.context';
 import { Header } from '../../components/Header/Header';
+import { useUsers } from '../../hooks/useUsers.hook';
 
 
 export const Login: React.FC = () =>{
@@ -18,8 +19,8 @@ export const Login: React.FC = () =>{
 
 	const context = useContext(UserContext);
 
-	const filter = context!.filter;
 
+	const {login} = useUsers()
 
 	//#region  wit use custom validation
 	// const { stateValidity, handleSubmit } = useFormSubmit({
@@ -30,7 +31,7 @@ export const Login: React.FC = () =>{
 	//#endregion
 
 	const { handleSubmit } = useFormSubmit({
-		onSuccess: (data) => filter(data),
+		onSuccess: (data) => login(data),
 	});
 
 	return(
@@ -38,8 +39,6 @@ export const Login: React.FC = () =>{
 			<Title text="Вход"/>
 			
 			<Form onSubmit={handleSubmit}  className={cn(styleForm['form'], styleForm['form_login'])}>
-
-				{/* <Input ref={inputRef} type="text" isValid={stateValidity} inputType={formLogin} text="Ваше имя"/> */}
 				<Input type="text" inputType={formLogin} text="Ваше имя"/>
 
 				<Button>Войти в профиль</Button>

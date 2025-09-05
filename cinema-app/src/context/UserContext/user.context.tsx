@@ -9,7 +9,7 @@ export const UserContext = createContext<IUserContext | null>(null);
 
 export const UserContextProvider = ({children} : IUserContextProps) => {
 
-	const [users, saveUsers] = useLocalStorage<IUser[]>('data', []);
+	const [users, saveUsers] = useLocalStorage<IUser[]>('users', []);
 	const [user, setUser] = useState<IUser | null>(null);
 	const navigate = useNavigate()
 
